@@ -1,0 +1,4 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>대화·메시지 조사 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header><main class="narrow"><div class="section-heading"><p class="eyebrow">관리자 · 감사 대상</p><h1>대화·메시지 조사</h1><p>메시지 신고 상세의 바로가기를 사용하거나 확인이 필요한 대화 ID를 입력하세요. 대화 본문은 조사 사유를 기록한 뒤에만 열람할 수 있습니다.</p></div><form method="get" th:action="@{/admin/messages/inspect}" class="card stack"><label>대화 ID<input name="conversationId" type="text" inputmode="text" maxlength="36" pattern="[0-9a-fA-F-]{36}" placeholder="00000000-0000-0000-0000-000000000000" required></label><button class="button">조사 사유 입력으로 이동</button></form></main><footer th:replace="~{fragments/layout :: footer}"></footer></body></html>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>회원가입 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+<main class="narrow">
+  <div class="section-heading"><p class="eyebrow">안전한 시작</p><h1>회원가입</h1><p>실제 금융정보는 입력하지 마세요.</p></div>
+  <form th:action="@{/signup}" th:object="${form}" method="post" class="card stack">
+    <div th:if="${#fields.hasGlobalErrors()}" class="alert danger" th:each="error : ${#fields.globalErrors()}" th:text="${error}"></div>
+    <label>이메일<input th:field="*{email}" type="email" autocomplete="email" maxlength="254" required><small class="field-error" th:errors="*{email}"></small></label>
+    <label>닉네임<input th:field="*{nickname}" th:errorclass="input-error" th:attr="aria-invalid=${#fields.hasErrors('nickname')}" autocomplete="nickname" minlength="2" maxlength="30" required><small class="field-error" th:errors="*{nickname}"></small></label>
+    <label>비밀번호<input th:field="*{password}" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><small class="field-error" th:errors="*{password}"></small></label>
+    <label>비밀번호 확인<input th:field="*{passwordConfirm}" type="password" autocomplete="new-password" minlength="12" maxlength="128" required><small class="field-error" th:errors="*{passwordConfirm}"></small></label>
+    <button class="button" type="submit">안전하게 가입하기</button>
+  </form>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body></html>

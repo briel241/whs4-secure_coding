@@ -1,0 +1,29 @@
+name: 버그 보고
+description: 재현 가능한 기능 문제를 보고합니다.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 문제
+      description: 실제 개인정보나 인증정보를 포함하지 마세요.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 절차
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 환경
+      placeholder: OS, Java, 브라우저
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 결과
+    validations:
+      required: true

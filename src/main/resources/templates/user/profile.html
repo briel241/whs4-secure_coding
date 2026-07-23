@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>프로필 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header>
+<main class="narrow"><div class="section-heading"><p class="eyebrow">계정</p><h1>내 프로필</h1></div>
+<p th:if="${param.updated}" class="alert success">프로필을 변경했습니다.</p>
+<section class="card stack"><dl class="detail-list"><div><dt>이메일</dt><dd th:text="${user.email}"></dd></div><div><dt>계정 상태</dt><dd th:text="${user.status}"></dd></div></dl>
+<form th:action="@{/profile}" th:object="${form}" method="post" class="stack"><label>닉네임<input th:field="*{nickname}" th:errorclass="input-error" th:attr="aria-invalid=${#fields.hasErrors('nickname')}" minlength="2" maxlength="30" required><small class="field-error" th:errors="*{nickname}"></small></label><button class="button" type="submit">프로필 저장</button></form></section>
+<section class="card danger-zone"><h2>회원 탈퇴</h2><p>탈퇴하면 로그인과 송금이 즉시 중지됩니다. 완료된 원장과 감사 기록은 무결성을 위해 보존됩니다.</p><form th:action="@{/profile/withdraw}" method="post"><button class="button danger" type="submit">계정 탈퇴</button></form></section>
+</main><footer th:replace="~{fragments/layout :: footer}"></footer></body></html>

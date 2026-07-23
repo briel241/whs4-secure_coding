@@ -1,0 +1,4 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>송금 완료 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header><main class="narrow"><div class="section-heading"><p class="eyebrow">처리 완료</p><h1>가상 포인트 송금</h1></div><section class="confirm-card card"><span>상태</span><strong th:text="${transfer.status}"></strong><span>보낸 사람</span><strong th:text="${transfer.sender.nickname}"></strong><span>받는 사람</span><strong th:text="${transfer.recipient.nickname}"></strong><span>금액</span><strong class="confirm-amount" th:text="|${#numbers.formatInteger(transfer.amount,0,'COMMA')} P|"></strong><small th:text="${transfer.completedAt}"></small></section><a class="button" th:href="@{/wallet}">지갑으로</a></main><footer th:replace="~{fragments/layout :: footer}"></footer></body></html>

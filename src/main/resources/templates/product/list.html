@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>상품 찾기 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header><main class="container section">
+<div class="section-heading"><p class="eyebrow">좋은 물건 찾기</p><h1>상품 검색</h1></div>
+<form th:action="@{/products}" th:object="${search}" method="get" class="filter-panel card">
+<label>검색어<input th:field="*{query}" maxlength="100" placeholder="상품명"></label>
+<label>카테고리<select th:field="*{category}"><option value="">전체</option><option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option></select></label>
+<label>최소 가격 (원)<span class="money-input"><input th:field="*{minPrice}" type="text" inputmode="numeric" pattern="[0-9,]*" maxlength="11" autocomplete="off" data-price-input></span></label>
+<label>최대 가격 (원)<span class="money-input"><input th:field="*{maxPrice}" type="text" inputmode="numeric" pattern="[0-9,]*" maxlength="11" autocomplete="off" data-price-input></span></label>
+<label>상태<select th:field="*{status}"><option value="">전체</option><option th:each="s : ${statuses}" th:value="${s}" th:text="${s.label}"></option></select></label>
+<label>거래 방식<select th:field="*{tradeMethod}"><option value="">전체</option><option th:each="t : ${tradeMethods}" th:value="${t}" th:text="${t.label}"></option></select></label>
+<label>정렬<select th:field="*{sort}"><option value="latest">최신순</option><option value="priceAsc">가격 낮은순</option><option value="priceDesc">가격 높은순</option></select></label>
+<input type="hidden" th:field="*{size}"><button class="button accent" type="submit">조건 적용</button></form>
+<div class="result-bar"><strong th:text="|${page.totalElements}개 상품|"></strong><a class="button small" th:href="@{/products/new}">상품 등록</a></div>
+<div class="product-grid"><a class="card product-card" th:each="product : ${page.content}" th:href="@{/products/{id}(id=${product.id})}"><div class="product-placeholder">Tiny<br>Find</div><span class="badge" th:text="${product.saleStatus.label}"></span><h2 th:text="${product.title}"></h2><strong th:text="|${#numbers.formatInteger(product.price, 0, 'COMMA')}원|"></strong><small th:text="|${product.category.name} · ${product.tradeRegion ?: '지역 협의'}|"></small></a><div th:if="${page.empty}" class="empty card">조건에 맞는 상품이 없습니다. 검색 조건을 바꿔 보세요.</div></div>
+<nav class="pagination" aria-label="페이지"><a th:if="${page.hasPrevious()}" th:href="@{/products(query=${search.query},category=${search.category},minPrice=${search.minPrice},maxPrice=${search.maxPrice},status=${search.status},tradeMethod=${search.tradeMethod},sort=${search.sort},page=${page.number - 1},size=${search.size})}">← 이전</a><span th:text="|${page.number + 1} / ${page.totalPages == 0 ? 1 : page.totalPages}|"></span><a th:if="${page.hasNext()}" th:href="@{/products(query=${search.query},category=${search.category},minPrice=${search.minPrice},maxPrice=${search.maxPrice},status=${search.status},tradeMethod=${search.tradeMethod},sort=${search.sort},page=${page.number + 1},size=${search.size})}">다음 →</a></nav>
+</main><footer th:replace="~{fragments/layout :: footer}"></footer><script defer th:src="@{/js/price-input.js}"></script></body></html>

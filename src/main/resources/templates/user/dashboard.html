@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>내 공간 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header>
+<main class="container dashboard"><div class="hero compact dashboard-hero"><div><p class="eyebrow">내 공간</p><h1 th:text="|${user.nickname}님, 안녕하세요|"></h1><p>상품, 대화, 가상 포인트를 한곳에서 관리하세요.</p></div></div>
+<div class="action-grid dashboard-actions">
+  <a class="card action-card" th:href="@{/products/new}"><strong>상품 등록</strong><span>안전한 입력 검사를 거쳐 판매글을 올립니다.</span></a>
+  <a class="card action-card" th:href="@{/my/products}"><strong>내 상품</strong><span>판매 상태와 상품 내용을 관리합니다.</span></a>
+  <a class="card action-card" th:href="@{/conversations}"><strong>대화</strong><span>구매자·판매자와 나눈 메시지를 확인합니다.</span></a>
+  <a class="card action-card" th:href="@{/wallet}"><strong>가상 포인트</strong><span>교육용 포인트 잔액과 송금 내역을 확인합니다.</span></a>
+  <a class="card action-card" th:href="@{/reports/mine}"><strong>내 신고</strong><span>접수한 신고의 처리 상태를 확인합니다.</span></a>
+  <a class="card action-card profile-card" th:href="@{/profile}"><strong>프로필 수정하기</strong><span>닉네임과 계정 상태를 관리합니다.</span></a>
+</div></main><footer th:replace="~{fragments/layout :: footer}"></footer></body></html>

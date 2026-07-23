@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  thymeleaf:
+    cache: false
+app:
+  upload:
+    directory: ${java.io.tmpdir}/tinyshop-test-uploads
+logging:
+  level:
+    root: WARN

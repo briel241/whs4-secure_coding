@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header>
+<main><section class="hero container"><div><p class="eyebrow">작지만 단단한 중고거래</p><h1>다시 쓸 물건과<br>다시 만날 사람들</h1><p>서버 세션과 엄격한 권한 검사로 만든 교육용 중고거래 플랫폼입니다.</p><div class="button-row"><a class="button" th:href="@{/products}">상품 둘러보기</a><a class="button secondary" th:href="@{/products/new}">내 상품 등록</a></div></div><div class="hero-card"><strong>가상 포인트 안내</strong><span>실제 돈이 아니며 결제·환전할 수 없습니다.</span><span>계좌번호나 카드번호를 입력하지 마세요.</span></div></section>
+<section class="container section"><div class="section-heading inline-heading"><div><p class="eyebrow">새로 올라온 상품</p><h2>지금 둘러보세요</h2></div><a th:href="@{/products}">전체 보기 →</a></div>
+<div class="product-grid"><a class="card product-card" th:each="product : ${products}" th:href="@{/products/{id}(id=${product.id})}"><div class="product-placeholder">Tiny<br>Find</div><span class="badge" th:text="${product.saleStatus.label}"></span><h3 th:text="${product.title}"></h3><strong th:text="|${#numbers.formatInteger(product.price, 0, 'COMMA')}원|"></strong><small th:text="|${product.tradeRegion ?: '지역 협의'} · ${product.seller.nickname}|"></small></a><div th:if="${#lists.isEmpty(products)}" class="empty card">아직 공개된 상품이 없습니다. 첫 상품을 등록해 보세요.</div></div></section></main>
+<footer th:replace="~{fragments/layout :: footer}"></footer></body></html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>상품 등록·수정 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header><main class="narrow">
+<div class="section-heading"><p class="eyebrow">내 물건 소개하기</p><h1 th:text="${product == null ? '상품 등록' : '상품 수정'}"></h1></div>
+<form th:action="${product == null ? '/products' : '/products/' + product.id}" th:object="${form}" method="post" enctype="multipart/form-data" class="card stack">
+<div th:if="${#fields.hasGlobalErrors()}" class="alert danger" th:each="error : ${#fields.globalErrors()}" th:text="${error}"></div>
+<label>제목<input th:field="*{title}" minlength="2" maxlength="100" required><small class="field-error" th:errors="*{title}"></small></label>
+<label>설명<textarea th:field="*{description}" rows="8" maxlength="5000" required></textarea><small class="field-error" th:errors="*{description}"></small></label>
+<div class="form-grid"><label>가격 (원)<span class="money-input"><input th:field="*{price}" type="text" inputmode="numeric" pattern="[0-9,]*" maxlength="11" autocomplete="off" data-price-input required></span><small class="field-error" th:errors="*{price}"></small></label><label>카테고리<select th:field="*{categoryId}" required><option value="">선택</option><option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option></select><small class="field-error" th:errors="*{categoryId}"></small></label>
+<label>상품 상태<select th:field="*{itemCondition}" required><option value="">선택</option><option th:each="c : ${conditions}" th:value="${c}" th:text="${c.label}"></option></select></label><label>거래 방식<select th:field="*{tradeMethod}" required><option value="">선택</option><option th:each="t : ${tradeMethods}" th:value="${t}" th:text="${t.label}"></option></select></label>
+<label>거래 지역<input th:field="*{tradeRegion}" maxlength="100"></label><label>판매 상태<select th:field="*{saleStatus}" required><option th:each="s : ${saleStatuses}" th:value="${s}" th:text="${s.label}"></option></select></label></div>
+<label>상품 이미지<input name="images" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" multiple><small>JPG, PNG, WebP · 각 5MB 이하 · 상품당 최대 5개. 안전한 PNG로 다시 저장됩니다.</small></label>
+<div class="thumbs" th:if="${existingImages != null}"><img th:each="image : ${existingImages}" th:src="@{/images/{key}(key=${image.storageKey})}" alt="등록된 상품 이미지"></div>
+<button class="button accent" type="submit" th:text="${product == null ? '상품 등록' : '변경 저장'}"></button></form>
+</main><footer th:replace="~{fragments/layout :: footer}"></footer><script defer th:src="@{/js/price-input.js}"></script></body></html>

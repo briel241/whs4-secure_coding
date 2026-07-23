@@ -1,0 +1,10 @@
+spring:
+  thymeleaf:
+    cache: false
+app:
+  demo:
+    enabled: true
+    initial-points: 100000
+    admin-email: ${DEMO_ADMIN_EMAIL:admin@example.invalid}
+    admin-password: ${DEMO_ADMIN_PASSWORD:change-this-demo-password}
+    user-password: ${DEMO_USER_PASSWORD:change-this-demo-password}

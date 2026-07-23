@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>로그인 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+<main class="narrow">
+  <div class="section-heading"><p class="eyebrow">다시 만나 반가워요</p><h1>로그인</h1></div>
+  <p th:if="${param.registered}" class="alert success">가입이 완료되었습니다. 로그인해 주세요.</p>
+  <p th:if="${param.error}" class="alert danger">이메일 또는 비밀번호가 올바르지 않거나 계정을 사용할 수 없습니다.</p>
+  <form th:action="@{/login}" method="post" class="card stack">
+    <label for="username">이메일<input id="username" name="username" type="email" autocomplete="username" required></label>
+    <label for="password">비밀번호<input id="password" name="password" type="password" autocomplete="current-password" required></label>
+    <button class="button" type="submit">로그인</button>
+  </form>
+  <p class="center">계정이 없나요? <a th:href="@{/signup}">회원가입</a></p>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body></html>

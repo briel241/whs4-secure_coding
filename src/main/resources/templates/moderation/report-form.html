@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>신고 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header><main class="narrow"><div class="section-heading"><p class="eyebrow">안전한 커뮤니티</p><h1>신고 접수</h1><p>신고자 정보는 신고 대상에게 공개되지 않습니다.</p></div>
+<form th:action="@{/reports}" th:object="${form}" method="post" class="card stack"><div th:if="${#fields.hasGlobalErrors()}" class="alert danger" th:each="e : ${#fields.globalErrors()}" th:text="${e}"></div><input type="hidden" th:field="*{targetType}"><input type="hidden" th:field="*{targetId}"><label>신고 유형<select th:field="*{reportType}" required><option value="">선택</option><option th:each="t : ${types}" th:value="${t}" th:text="${t.label}"></option></select><small class="field-error" th:errors="*{reportType}"></small></label><label>상세 내용<textarea th:field="*{details}" minlength="10" maxlength="1000" rows="7" required></textarea><small class="field-error" th:errors="*{details}"></small></label><button class="button danger" type="submit">신고 접수</button></form>
+</main><footer th:replace="~{fragments/layout :: footer}"></footer></body></html>

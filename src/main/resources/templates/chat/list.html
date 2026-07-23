@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>대화 · TinyShop</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header th:replace="~{fragments/layout :: header}"></header><main class="container section"><div class="section-heading"><p class="eyebrow">구매자와 판매자 사이</p><h1>대화 목록</h1></div>
+<a class="list-card card conversation-row" th:each="c : ${conversations}" th:href="@{/conversations/{id}(id=${c.id})}"><div><span class="badge" th:text="${c.product.saleStatus.label}"></span><h2 th:text="${c.product.title}"></h2><p th:text="${c.buyer.id == viewerId ? c.seller.nickname : c.buyer.nickname}"></p></div><span>대화 보기 →</span></a><div th:if="${#lists.isEmpty(conversations)}" class="empty card">아직 대화가 없습니다. 상품 상세에서 판매자에게 문의해 보세요.</div>
+</main><footer th:replace="~{fragments/layout :: footer}"></footer></body></html>
